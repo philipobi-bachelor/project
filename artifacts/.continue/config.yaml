@@ -1,0 +1,54 @@
+%YAML 1.1
+---
+# configuration file for https://www.continue.dev/ extension using 
+# physics faculty inference service https://collab.dvb.bayern/x/uophDQ
+
+name: Assistant
+version: 0.0.1
+schema: v1
+
+model_defaults: &model_defaults
+  provider: openai
+  apiBase: https://inference.server.physik.uni-muenchen.de/v1
+  apiKey: ${{ secrets.INFERENCE_SERVICE_TOKEN }}
+
+models:
+  - name: Gemma 7B
+    model: codegemma-7b
+    <<: *model_defaults
+    defaultCompletionOptions:
+      contextLength: 8000 # https://huggingface.co/blog/codegemma#what-is-codegemma
+  - name: LLama 3.1
+    model: llama-3.1-70b
+    <<: *model_defaults
+    defaultCompletionOptions:
+      contextLength: 128000 # https://github.com/meta-llama/llama-models    
+  - name: LLama 3.3
+    model: llama-3.3-70b
+    <<: *model_defaults
+    defaultCompletionOptions:
+      contextLength: 128000 # https://github.com/meta-llama/llama-models
+  - name: Codestral 22B
+    model: codestral-22b
+    <<: *model_defaults
+    defaultCompletionOptions:
+      contextLength: 32000 # https://mistral.ai/news/codestral
+  - name: Mistral Small
+    model: mistral-small
+    <<: *model_defaults
+    defaultCompletionOptions:
+      contextLength: 32000 # https://ollama.com/library/mistral-small
+
+context:
+  - provider: code
+  - provider: docs
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase
+
+
+docs:
+  - name: basf2 docs
+    startUrl: https://software.belle2.org/release-09-00-00/sphinx/index.html
