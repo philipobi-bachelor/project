@@ -1,0 +1,73 @@
+V0FinderModule::event()
+    get charged tracks:
+    for track in event:
+        get track fit result with closest mass to pion
+        depending on charge of fit result, push to tracksPlus or tracksMinus
+
+    iterate over all possible (+, -) track pairs:
+    for trackPlus in tracksPlus
+        for trackMinus in tracksMinus
+            isTrackPairSelected
+            for hypothesis
+                if preFilterTracks(hypothesis)
+                    fitAndStore
+
+V0FinderModule::isTrackPairSelected()
+    # do not need to check again if track fit result with closest mass exists
+    
+    extrapolate tracks around their individual POCA with straight lines
+    
+    select if tracks nearly parallel (cos > precutCosAlpha)
+    
+    reject tracks if vertex in beam pipe:    
+        find closest points on straight lines -> vertex estimate
+        if distance of vertex <= precutRho reject
+
+V0FinderModule::preFilterTracks(hypothesis)
+    set allowed m^2 range based on hypothesis
+    
+    get hypothesis daughter particle tuple
+
+    # do we need all the operations or can we simplify the candmass range computation
+    
+    for positive and negative track:
+        get track fit result with closest mass to hypothesis daughter particle
+
+    compute m^2 range based on hypothesis particle mass and momentum of closest track fit result
+
+    if (
+        allowed m^2 range based on hypthesis and
+        m^2 range based on track fit results 
+        overlap
+    )
+        select 
+    else 
+        reject
+
+V0FinderModule::fitAndStore() wraps NewV0Fitter::fitAndStore()
+    for positive and negative track:
+        get (first) RecoTrack related to track
+        get particle type and pdg code of track fit with closest mass
+     
+     perform initial vertex fit:
+     vertexFit(recoTrack+/-, pdgCode+/-)
+
+NewV0Fitter::vertexFit(recoTrack+/-, pdgCode+/-)
+    for positive and negative RecoTrack:
+        get genfit::AbsTrackRep of RecoTrack for pdg code
+        create copy of genfit::Tracks wrapped by RecoTrack
+
+    genfit::GFRaveVertex vert;
+    fitGFRaveVertex(copied genfit::Tracks+/-, vert)
+    
+    if fit successful:
+        apply cuts on vertex, invariant mass
+        extrapolate RecoTrack+/- to fitted vertex
+        save fitted vertex and tracks to NewV0Fitter members
+
+    return status
+
+NewV0Fitter::fitGFRaveVertex(genfit::Tracks+/-, vert)
+
+
+
