@@ -45,29 +45,132 @@ V0FinderModule::preFilterTracks(hypothesis)
         reject
 
 V0FinderModule::fitAndStore() wraps NewV0Fitter::fitAndStore()
-    for positive and negative track:
+    for track+/-:
         get (first) RecoTrack related to track
-        get particle type and pdg code of track fit with closest mass
+        get particle type and pdg code of track fit result with closest mass to hypothesis daughter particle
      
      perform initial vertex fit:
      vertexFit(recoTrack+/-, pdgCode+/-)
 
-NewV0Fitter::vertexFit(recoTrack+/-, pdgCode+/-)
-    for positive and negative RecoTrack:
-        get genfit::AbsTrackRep of RecoTrack for pdg code
-        create copy of genfit::Tracks wrapped by RecoTrack
+     if error exit
+
+     if inner hits removal enabled:
+        store pointer to original RecoTrack+/-
+        while inner hits and iteration limit not hit
+            for RecoTrack+/-:
+                if track has inner hits
+                    returned RecoTrack = removeHitsAndRefit(original RecoTrack, RecoTrack, closest fit result particle type)
+                    if error exit
+            if both returned RecoTracks match the input RecoTrack:
+                done, break
+            
+            vertexFit
+            if error break, keeping results of last successful iteration
+            set RecoTrack+/- to returned RecoTrack+/- and go to next iteration
+
+NewV0Fitter::vertexFit(RecoTrack+/-, pdgCode+/-)
+    for genfit::Track wrapped by RecoTrack+/-:
+        get track representation for pdg code
+        create copy of genfit::Track
+        set cardinal (i.e. main) representation of copied genfit track to pdg code
 
     genfit::GFRaveVertex vert;
-    fitGFRaveVertex(copied genfit::Tracks+/-, vert)
+    fitGFRaveVertex(copied genfit::Track+/-, vert)
     
     if fit successful:
         apply cuts on vertex, invariant mass
-        extrapolate RecoTrack+/- to fitted vertex
+        
+        extrapolate RecoTrack+/- to fitted vertex: 
+        for genfit::Track wrapped by RecoTrack+/-:
+            copy fitted state on plane (i.e. track parameters) 
+                of first hit
+                of track representation corresponding to pdg code
+            
+        extrapolateToVertex(copiedState+/-, vert)
+        
         save fitted vertex and tracks to NewV0Fitter members
 
     return status
 
-NewV0Fitter::fitGFRaveVertex(genfit::Tracks+/-, vert)
 
+NewV0Fitter::fitGFRaveVertex(genfit::Track+/-, vertex)
+    instantiate vertex vector container:
+    VertexVector vertexVector
+    
+    put pointers to genfit::Track+/- in vector trackPair
+    
+    instantiate genfit vertex finder and find vertex using track pair:
+    genfit::GFRaveVertexFactory vertexFactory
+    vertexFactory.findVertices(&vertexVector.v, trackPair)
+
+    if not exactly one vertex in vertexVector:
+    if not exactly two tracks in first vertex of vertexVector:
+        return false
+    else: 
+        set passed vertex reference to first vertex in vertexvector
+        return true
+
+NewV0Fitter::extrapolateToVertex(state+/-, vert)
+    for state+/-:
+        extrapolate state in first hit to POCA to vertex, returns length
+        if length > / < 0:
+            extrapolation step had component in / against momentum direction
+            -> first hit was before / after vertex
+
+
+NewV0Fitter::removeHitsAndRefit(original RecoTrack, RecoTrack, ParticleType)
+    get sorted vector of recoHitInformation of original RecoTrack
+    
+    get corresponding boolean vector useInFit representing if each hit used in fitting
+    
+    get genfit track representation
+        of genfit::Track wrapped by original RecoTrack
+        corresponding to particle type
+    
+    for hit in hit information vector:
+        if hit not used in fit continue
+        
+        get state on hit plane of track representation
+        extrapolate state to POCA to vertex, returns length
+        if length > 0:
+            hit was before vertex
+            set useInFit[i] to false
+        else
+            hit was after vertex
+            set first hit index to current index
+            break
+        
+    if mode 2: dont use svd hits:
+        index vector of svd hits
+        for hit in hit information vector:
+            if not used in fit continue
+            if hit from SVD push index to index vector else break
+        if index vector has 1 or 2 elements
+        set use in fit to false for these hits
+
+    if no hits removed:
+        track doesnt need to be refitted:
+        -> return original RecoTrack
+
+    if remaining hits < 5:
+        no sense in refitting
+        return RecoTrack
+
+    get state on plane 
+        of first hit after vertex
+        of track representation
+
+    copy originalRecoTrack / create new reco track using original RecoTrack and State as seed information
+
+    set use in fit information 
+        for recoHitInformation vector
+        of copied RecoTrack
+    to match useInFit vector
+
+    fit copied RecoTrack
+    if error return RecoTrack
+
+    return copied  RecoTrack
+    
 
 
