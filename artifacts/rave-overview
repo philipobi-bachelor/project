@@ -1,0 +1,90 @@
+Rave Class Overview
+
+VertexFitter<N>
+- declares virtual method fitting vertex out of set of tracks:
+  vertex(vector<TransientTrack>) -> CachingVertex
+- template parameter N sets dimensionality of track parameter representation
+
+VertexReconstructor
+- declares virtual method reconstructing vertices out of set of tracks:
+  vertices(vector<TransientTrack>) -> vector<TransientVertex>
+
+    ConfigurableVertexReconstructor
+    
+    AbstractConfReconstructor
+        
+        ReconstructorFromFitter
+        - wraps AbstractConfFitter into VertexReconstructor interface
+        - 
+
+    rave::VertexReconstructor
+    - parses input string into configuration map
+    - configures ConfigurableVertexReconstructor member theRector
+
+KalmanVertexFitter : VertexFitter<5>
+- forwards calls to vertex to sequential fitter member
+- if smoothing used (used by genfit), fitter configured as follows
+  SequentialVertexFitter<5>(
+      pSet: pSet,
+      linP: FsmwLinearizationPointFinder(20, -2., 0.4, 10.),
+      updator: KalmanVertexUpdator<5>(), 
+      smoother: SequentialVertexSmoother<5>(...)
+      ltsf: LinearizedTrackStateFactory()
+  )
+
+FsmwLinearizationPointFinder
+- creates combinations of at most n_tracks tracks
+
+
+
+SequentialVertexFitter<N> : VertexFitter<N>
+- iterates over set of tracks until transverse distance between vertices computed in previous and current iteration less than convergence criteria
+- processing done in the vertex method:
+  getLinearizationPoint obtains initial estimate of vertex position linP
+  if linP not within tracker bounds reset to origin
+  initialize vertex error matrix to large values
+  combine linP and error to VertexState object state
+  vtContainer = linearizeTracks approximates track trajectories as straight lines near vertex
+  run actual fitting algorithm fit(vtContainer, state, false)
+- processing done in the fit method:
+  extracts priorVertexPosition and priorVertexError from passed estimated state
+  initializes returnVertex with prior position and error
+  main loop until
+      convergence (transverse distance between old and new vertex pos < threshold) or
+      iteration limit exceeded
+  :
+      create fVertex for current iteration
+      globalVTracks = reLinearizeTracks around latest vertex position
+      for each track in globalVTracks:
+          update/refine fVertex by adding track
+          break if vertex no longer valid
+      check if vertex is valid, if not reset fVertex to origin with large uncertainty
+      perviousPosition = newPosition; newPosition = fVertex.position()
+      update returnVertex to fVertex
+      clear globalVTracks
+  
+  if fit failed return invalid vertex
+  smooth the returnVertex and return it
+
+- reason for using transverse distance as measure of convergence: 
+  - if vertex position stabilized, updates become smaller
+  - position measurements in transverse plane (i.e. transverse to beam axis) generally better
+
+VertexRecoManager
+- singleton
+- get(str) returns registered AbstractConfReconstructor
+
+VertexFitterManager
+- singleton
+- get(str) returns registered AbstractConfFitter
+
+rave::VertexFactory
+- forwards method configuration string to rave::VertexReconstructor
+- stores configured rave::VertexReconstructor as member theRector
+
+CachingVertex, TransientVertex 
+- internal representation used in algorithms
+
+rave::Vertex
+- vertex interface
+
