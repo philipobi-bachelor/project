@@ -53,13 +53,13 @@ SequentialVertexFitter<N> : VertexFitter<N>
       convergence (transverse distance between old and new vertex pos < threshold) or
       iteration limit exceeded
   :
-      create fVertex for current iteration
-      globalVTracks = reLinearizeTracks around latest vertex position
+      fVertex = initialVertex
+      globalVTracks = reLinearizeTracks around latest vertex position (-> ltsf)
       for each track in globalVTracks:
-          update/refine fVertex by adding track
+          update/refine fVertex by adding track (-> updator)
           break if vertex no longer valid
       check if vertex is valid, if not reset fVertex to origin with large uncertainty
-      perviousPosition = newPosition; newPosition = fVertex.position()
+      previousPosition = newPosition; newPosition = fVertex.position()
       update returnVertex to fVertex
       clear globalVTracks
   
