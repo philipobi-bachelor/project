@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+SRC="$1"
+DST="$2"
+
+# todo: also remove clhep
+
+rm_rave_src() {
+    rm -r "${DST}"/share/rave
+    rm -r "${DST}"/include/rave
+    rm "${DST}"/Linux_x86_64/common/lib/libRave*
+    rm "${DST}"/Linux_x86_64/common/bin/rave_version
+    rm "${DST}"/Linux_x86_64/common/lib/pkgconfig/rave-impl.pc
+    rm "${DST}"/Linux_x86_64/common/lib/pkgconfig/rave.pc
+    rm "${DST}"/Linux_x86_64/common/bin/rave_version
+}
+
+# symlink SRC directory structure into DST, overwrite existing
+cp -fsR "${SRC}/." "${DST}"
+# remove rave symlinks
+rm_rave_src
