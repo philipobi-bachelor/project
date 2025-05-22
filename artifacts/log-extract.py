@@ -19,54 +19,68 @@ def readlines_reversed(path, bufsiz=8192):
             yield segment.decode()
 
 
-def extract(path):
-    events = []
+def extract(filepath, dbpath):
+    import sqlite3
+    con = sqlite3.connect(dbpath)
     event = None
     fitAndStore = None
-    for line in filter(
-        lambda line: "NewV0Fitter::" in line or "V0FinderModule::" in line,
-        readlines_reversed(path),
-    ):
+    vertexFit = None
 
-        [_, method, *params] = line.split()
+    with con:
+        cur = con.cursor()
 
-        match method:
-            case "V0FinderModule::event":
-                if event is not None:
-                    events.append(event)
+        for line in filter(
+            lambda line: "NewV0Fitter::" in line or "V0FinderModule::" in line,
+            readlines_reversed(filepath),
+        ):
+
+            [_, method, *params] = line.split()
+
+            match method:
+                case "V0FinderModule::event":
+                    # [INFO] V0FinderModule::event 139.483 ms
+                    [t_str, *_] = params
+                    
+                    cur.execute("INSERT INTO event (duration) VALUES (?)", (float(t_str),))
+                    event = cur.lastrowid
+
+                case "NewV0Fitter::fitAndStore":
+                    # [INFO] NewV0Fitter::fitAndStore <type: gamma> 3.387 ms
+                    [_, ptype, t_str, *_] = params
+                    ptype = ptype[:-1]
+                    
+                    cur.execute(
+                        "INSERT INTO fitAndStore (ptype, duration, event) VALUES (?, ?, ?)",
+                        (ptype, float(t_str), event)
+                        )
+                    fitAndStore = cur.lastrowid
                 
-                [t_str, *_] = params
-                event = {"t": float(t_str), "fitAndStore": []}
+                case "NewV0Fitter::vertexFit":
+                    [t_str, *_] = params
+                    
+                    cur.execute(
+                        "INSERT INTO vertexFit (duration, fitAndStore) VALUES (?, ?)",
+                        (float(t_str), fitAndStore)
+                    )
+                    vertexFit = cur.lastrowid
 
-            case "NewV0Fitter::fitAndStore":
-                if fitAndStore is not None:
-                    event["fitAndStore"].append(fitAndStore)
-                
-                [_, ptype, t_str, *_] = params
-                fitAndStore = {
-                    "t": float(t_str),
-                    "ptype": ptype[:-1],
-                    "vertexFit": [],
-                    "fitGFRaveVertex": [],
-                    "removeHitsAndRefit": [],
-                }
+                case "NewV0Fitter::fitGFRaveVertex":
+                    [t_str, *_] = params
+                    
+                    cur.execute(
+                        "INSERT INTO fitGFRaveVertex (duration, vertexFit) VALUES (?, ?)",
+                        (float(t_str), vertexFit)
+                    )
 
-            case "NewV0Fitter::vertexFit":
-                [t_str, *_] = params
-                fitAndStore["vertexFit"].append(float(t_str))
-
-            case "NewV0Fitter::fitGFRaveVertex":
-                [t_str, *_] = params
-                fitAndStore["fitGFRaveVertex"].append(float(t_str))
-
-            case "NewV0Fitter::removeHitsAndRefit":
-                [t_str, *_] = params
-                fitAndStore["removeHitsAndRefit"].append(float(t_str))
-    
-    return events
+                case "NewV0Fitter::removeHitsAndRefit":
+                    [t_str, *_] = params
+                    
+                    cur.execute(
+                        "INSERT INTO removeHitsAndRefit (duration, fitAndStore) VALUES (?, ?)",
+                        (float(t_str), fitAndStore)
+                    )
 
 def main():
-    events = extract("v0ValidationGenerateSample.py.log")
-    pprint(events[:10])
+    extract("v0finder-validation.log", "v0finder-profiling.sqlite")
 
 main()

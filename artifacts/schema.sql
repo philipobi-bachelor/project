@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS event (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    duration FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS fitAndStore (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ptype TEXT,
+    duration FLOAT,
+    event INTEGER NOT NULL,
+    FOREIGN KEY (event) REFERENCES event(id)
+);
+
+CREATE TABLE IF NOT EXISTS vertexFit (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    duration FLOAT,
+    fitAndStore INTEGER NOT NULL,
+    FOREIGN KEY (fitAndStore) REFERENCES fitAndStore(id)
+);
+
+CREATE TABLE IF NOT EXISTS fitGFRaveVertex (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    duration FLOAT,
+    vertexFit INTEGER NOT NULL,
+    FOREIGN KEY (vertexFit) REFERENCES vertexFit(id)
+);
+
+CREATE TABLE IF NOT EXISTS removeHitsAndRefit (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    duration FLOAT,
+    fitAndStore INTEGER NOT NULL,   
+    FOREIGN KEY (fitAndStore) REFERENCES fitAndStore(id)
+);
