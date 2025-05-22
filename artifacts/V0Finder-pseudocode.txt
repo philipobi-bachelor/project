@@ -173,8 +173,11 @@ NewV0Fitter::removeHitsAndRefit(original RecoTrack, RecoTrack, ParticleType)
     return copied  RecoTrack
     
 
-removehitsandrefit
-fitGFRaveVertex
-vertex fit
-fitAndStore hyp
+
+Attach timers:
 event
+    for ... fitandstore
+        vertex fit -> fit gfravevertex
+        for ...
+            removehitsandrefit
+            vertex fit -> fit gfravevertex
