@@ -101,7 +101,7 @@ NewV0Fitter::fitGFRaveVertex(genfit::Track+/-, vertex)
     
     instantiate genfit vertex finder and find vertex using track pair:
     genfit::GFRaveVertexFactory vertexFactory
-    vertexFactory.findVertices(&vertexVector.v, trackPair)
+    vertexFactory.findVertices(&vertexVector.v, trackPair) -> rave::VertexFactory.create(vector<Track>, use_beamspot)
 
     if not exactly one vertex in vertexVector:
     if not exactly two tracks in first vertex of vertexVector:
