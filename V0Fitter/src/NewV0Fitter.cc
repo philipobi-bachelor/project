@@ -84,7 +84,7 @@ std::pair<Const::ParticleType, Const::ParticleType> NewV0Fitter::getTrackHypothe
 bool NewV0Fitter::fitAndStore(const Track* trackPlus, const Track* trackMinus, const Const::ParticleType& v0Hypothesis,
                               bool& isForceStored, bool& isHitRemoved)
 {
-  Utils::Timer timer("NewV0Fitter::fitAndStore " + v0Hypothesis.__repr__());
+  Belle2::MyTimer timer("NewV0Fitter::fitAndStore");
   /// Initialize status flags and result storage
   isForceStored = false;
   isHitRemoved = false;
@@ -167,7 +167,7 @@ bool NewV0Fitter::fitAndStore(const Track* trackPlus, const Track* trackMinus, c
 int NewV0Fitter::vertexFit(const RecoTrack* recoTrackPlus, const RecoTrack* recoTrackMinus,
                            int pdgTrackPlus, int pdgTrackMinus, const Const::ParticleType& v0Hypothesis)
 {
-  Utils::Timer timer("NewV0Fitter::vertexFit");
+  Belle2::MyTimer timer("NewV0Fitter::vertexFit");
   
   // get track representations for given PDG codes and check their existence
 
@@ -256,7 +256,7 @@ bool NewV0Fitter::setCardinalRep(genfit::Track& gfTrack, int pdgCode)
 
 bool NewV0Fitter::fitGFRaveVertex(genfit::Track& trackPlus, genfit::Track& trackMinus, genfit::GFRaveVertex& vertex)
 {
-  Utils::Timer timer("NewV0Fitter::fitGFRaveVertex");
+  Belle2::MyTimer timer("NewV0Fitter::fitGFRaveVertex");
   VertexVector vertexVector;
   std::vector<genfit::Track*> trackPair {&trackPlus, &trackMinus};
 
@@ -312,7 +312,7 @@ int NewV0Fitter::extrapolateToVertex(genfit::MeasuredStateOnPlane& statePlus, ge
 const RecoTrack* NewV0Fitter::removeHitsAndRefit(const RecoTrack* origRecoTrack, const RecoTrack* lastRecoTrack,
                                                  const Const::ParticleType& ptype)
 {
-  Utils::Timer timer("NewV0Fitter::removeHitsAndRefit");
+  Belle2::MyTimer timer("NewV0Fitter::removeHitsAndRefit");
   // make a copy of useInFit flags
   std::vector<bool> useInFit;
   const auto& recoHitInformations = origRecoTrack->getRecoHitInformations(true); // true to get sorted hits info

@@ -16,13 +16,41 @@
 #include <tracking/dataobjects/RecoTrack.h>
 #include <genfit/Track.h>
 #include <genfit/GFRaveVertex.h>
+#include <sys/time.h>
+#include <iostream>
+#include <iomanip>
 #include <map>
+#include <framework/logging/Logger.h>
 
 namespace Belle2 {
 
   /**
    * Improved V0 fitter class
    */
+  class MyTimer {
+    public:
+    void stop() {
+      get_time(ts1);
+      double dt = (ts1.tv_sec - ts0.tv_sec) + (ts1.tv_nsec - ts0.tv_nsec) * 1e-9;
+      B2INFO( text << " " << std::scientific << std::setprecision(3) << dt << " s");
+      stopped = true;
+    }
+    explicit MyTimer(const char * text) : text(text) {
+      get_time(ts0);
+    }
+    ~MyTimer() { 
+      if(not stopped) stop(); 
+    }
+    
+    private:
+      void get_time(timespec &ts) {
+        clock_gettime(CLOCK_REALTIME, &ts);
+      }
+      timespec ts0, ts1;
+      const char * text;
+      bool stopped = false;
+  };
+
   class NewV0Fitter {
 
   public:
