@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+docker run --rm -d -e ARANGO_NO_AUTH=1 -p 8529:8529 -v $HOME/Documents/bachelor/dump/profiling/db:/var/lib/arangodb3 arangodb
