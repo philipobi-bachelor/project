@@ -18,8 +18,7 @@ def readlines_reversed(path, bufsiz=8192):
         if segment is not None:
             yield segment.decode()
 
-
-def extract(filepath, dbpath):
+def extract_sqlite(filepath, dbpath):
     import sqlite3
     con = sqlite3.connect(dbpath)
     event = None
@@ -41,7 +40,7 @@ def extract(filepath, dbpath):
                     # [INFO] V0FinderModule::event 139.483 ms
                     [t_str, *_] = params
                     
-                    cur.execute("INSERT INTO event (duration) VALUES (?)", (float(t_str),))
+                    cur.execute("INSERT INTO event (t) VALUES (?)", (float(t_str),))
                     event = cur.lastrowid
 
                 case "NewV0Fitter::fitAndStore":
@@ -50,7 +49,7 @@ def extract(filepath, dbpath):
                     ptype = ptype[:-1]
                     
                     cur.execute(
-                        "INSERT INTO fitAndStore (ptype, duration, event) VALUES (?, ?, ?)",
+                        "INSERT INTO fitAndStore (ptype, t, event) VALUES (?, ?, ?)",
                         (ptype, float(t_str), event)
                         )
                     fitAndStore = cur.lastrowid
@@ -59,7 +58,7 @@ def extract(filepath, dbpath):
                     [t_str, *_] = params
                     
                     cur.execute(
-                        "INSERT INTO vertexFit (duration, fitAndStore) VALUES (?, ?)",
+                        "INSERT INTO vertexFit (t, fitAndStore) VALUES (?, ?)",
                         (float(t_str), fitAndStore)
                     )
                     vertexFit = cur.lastrowid
@@ -68,7 +67,7 @@ def extract(filepath, dbpath):
                     [t_str, *_] = params
                     
                     cur.execute(
-                        "INSERT INTO fitGFRaveVertex (duration, vertexFit) VALUES (?, ?)",
+                        "INSERT INTO fitGFRaveVertex (t, vertexFit) VALUES (?, ?)",
                         (float(t_str), vertexFit)
                     )
 
@@ -76,11 +75,47 @@ def extract(filepath, dbpath):
                     [t_str, *_] = params
                     
                     cur.execute(
-                        "INSERT INTO removeHitsAndRefit (duration, fitAndStore) VALUES (?, ?)",
+                        "INSERT INTO removeHitsAndRefit (t, fitAndStore) VALUES (?, ?)",
                         (float(t_str), fitAndStore)
                     )
 
-def main():
-    extract("v0finder-validation.log", "v0finder-profiling.sqlite")
+def extract_awk(filepath):
+    events = []
+    event = None
+    
+    for line in filter(
+            lambda line: "NewV0Fitter::" in line or "V0FinderModule::" in line,
+            readlines_reversed(filepath),
+        ):
 
+            [_, method, *params] = line.split()
+
+            match method:
+                case "V0FinderModule::event":
+                    # [INFO] V0FinderModule::event 139.483 ms
+                    [t_str, *_] = params
+                    
+                case "NewV0Fitter::fitAndStore":
+                    # [INFO] NewV0Fitter::fitAndStore <type: gamma> 3.387 ms
+                    [_, ptype, t_str, *_] = params
+                    ptype = ptype[:-1]
+                    
+                   
+                case "NewV0Fitter::vertexFit":
+                    [t_str, *_] = params
+                    
+                   
+                case "NewV0Fitter::fitGFRaveVertex":
+                    [t_str, *_] = params
+                    
+                    
+
+                case "NewV0Fitter::removeHitsAndRefit":
+                    [t_str, *_] = params
+                    
+                    
+                    
+
+def main():
+    pass
 main()
