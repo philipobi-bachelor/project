@@ -146,7 +146,7 @@ void V0FinderModule::initialize()
 void V0FinderModule::event()
 {
   B2DEBUG(29, m_tracks.getEntries() << " tracks in event.");
-  Utils::Timer timer("V0FinderModule::event");
+  Belle2::MyTimer timer("V0FinderModule::event");
 
   // Group tracks into positive and negative tracks.
   std::vector<const Track*> tracksPlus;
