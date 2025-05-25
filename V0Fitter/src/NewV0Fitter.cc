@@ -20,7 +20,6 @@
 #include <genfit/FieldManager.h>
 #include <genfit/MaterialEffects.h>
 
-#include <framework/utilities/Utils.h>
 #include <framework/utilities/IOIntercept.h>
 
 using namespace Belle2;
@@ -167,10 +166,11 @@ bool NewV0Fitter::fitAndStore(const Track* trackPlus, const Track* trackMinus, c
 int NewV0Fitter::vertexFit(const RecoTrack* recoTrackPlus, const RecoTrack* recoTrackMinus,
                            int pdgTrackPlus, int pdgTrackMinus, const Const::ParticleType& v0Hypothesis)
 {
-  Belle2::MyTimer timer("NewV0Fitter::vertexFit");
   
   // get track representations for given PDG codes and check their existence
-
+  
+  Belle2::MyTimer timer("NewV0Fitter::vertexFit");
+  
   const auto* plusRepresentation = getTrackRepresentation(recoTrackPlus, pdgTrackPlus);
   if (not plusRepresentation) return c_NoTrackRepresentation;
 
@@ -259,14 +259,13 @@ bool NewV0Fitter::fitGFRaveVertex(genfit::Track& trackPlus, genfit::Track& track
   Belle2::MyTimer timer("NewV0Fitter::fitGFRaveVertex");
   VertexVector vertexVector;
   std::vector<genfit::Track*> trackPair {&trackPlus, &trackMinus};
-
+  
   try {
-    IOIntercept::OutputToLogMessages
-    logCapture("V0Fitter GFRaveVertexFactory", LogConfig::c_Info, LogConfig::c_Info);
-    logCapture.start();
-
     genfit::GFRaveVertexFactory vertexFactory;
+    
+    Belle2::MyTimer timer1("genfit::GFRaveVertexFactory::findVertices");
     vertexFactory.findVertices(&vertexVector.v, trackPair);
+    timer1.stop();
   } catch (...) {
     B2ERROR("V0Fitter: exception during vertex fit.");
     return false;
