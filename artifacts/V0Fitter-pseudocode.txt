@@ -1,0 +1,89 @@
+fitAndStore(
+    const *track+/-, 
+    v0Hypothesis, 
+    &isForceStored, 
+    &isHitRemoved
+    ){
+    recoTrack+/- = track+/-.getRelated<RecoTrack>(reco track store array name)
+    vertexPos = (0,0,0)
+
+    hasInnerHitStatus = 0
+
+    return false if not 
+    vertexFitWithRecoTracks(
+        const *track+/-,
+        *recoTrack+/-
+        &v0Hypothesis,
+        &hasInnerHitStatus,
+        &vertexPos,
+        m_forcestore
+        ) {
+        int pdg+/- = track+/-.getTrackFitResultWithClosestMass().pdgCode()
+        
+        trackRep+/- = recoTrack+/-.getTrackRepForPdg(pdg+/-)
+        
+        if (
+            not trackRep+/- or
+            not recoTrack+/-.fitSuccessful(trackRep+/-)
+        ) throw error, return
+
+        gfTrack+/- = copy(recoTrack+/-.get_genfit())
+
+        gfTrackReps+/- = gfTrack+/-.getTrackReps
+
+        for rep+/- in trackReps+/- {
+            if ( rep+/-.pdg == pdg+/- )
+                gfTrack+/-.setCardinalRep(rep+/-)
+        }
+
+        state+/- = copy(recoTrack+/-.stateFromFirstHit(trackRep+/-))
+
+        vertex;
+
+        return false if not 
+        fitGFRaveVertex(
+            &gfTrack+/-,
+            &vertex
+            ) {
+            vertexVector;
+            trackPair = {&gfTrack+, &gfTrack-}
+            vertexFactory.findVertices(&vertexVector, trackPair)
+
+            if ( error or not fit successful ) return false
+            else {
+                vertex = vertexVector[0]
+                return true
+            }
+        }
+        
+        vertexPos = vertex.getPos()
+
+        if ( vertex doesnt pass cuts )
+            return false
+
+        return false if not
+        extrapolateToVertex(
+            &state+/-,
+            &vertexPos,
+            &hasInnerHitStatus
+            ) {
+                hasInnerHitStatus = 0
+                len+/- = state+/-.extrapolateToPoint(vertexPos)
+                if ( len+/- > 0 ) set hasInnerHitStatus bits
+                if ( error ) return false
+                return true
+            }
+
+        if (
+            forceStore or
+            hasInnerHitStatus == 0
+        ) {
+            
+        }
+
+    }
+
+        
+        
+
+}
