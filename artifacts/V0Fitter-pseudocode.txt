@@ -9,81 +9,283 @@ fitAndStore(
 
     hasInnerHitStatus = 0
 
-    return false if not 
-    vertexFitWithRecoTracks(
+    return false if not vertexFitWithRecoTracks(
         const *track+/-,
         *recoTrack+/-
         &v0Hypothesis,
         &hasInnerHitStatus,
         &vertexPos,
-        m_forcestore
-        ) {
-        int pdg+/- = track+/-.getTrackFitResultWithClosestMass().pdgCode()
-        
-        trackRep+/- = recoTrack+/-.getTrackRepForPdg(pdg+/-)
-        
-        if (
-            not trackRep+/- or
-            not recoTrack+/-.fitSuccessful(trackRep+/-)
-        ) throw error, return
+        m_forcestore    
+    )
 
-        gfTrack+/- = copy(recoTrack+/-.get_genfit())
+    if ( no inner hits or force store ) return true
 
-        gfTrackReps+/- = gfTrack+/-.getTrackReps
+    failflag = false
+    
+    trackHypotheses = (particleHypTrack1, particleHypTrack2) = gettrackHypotheses(v0Hypothesis)
 
-        for rep+/- in trackReps+/- {
-            if ( rep+/-.pdg == pdg+/- )
-                gfTrack+/-.setCardinalRep(rep+/-)
+    int pdg+/- = track+/-.getTrackFitResultWithClosestMass(particleHypTrack1/2).pdgCode
+
+    recoTrack+/-_forRefit = null
+    cache_recoTrack = null
+
+    count_removeInnerHits = 0
+    
+    while ( hasInnerHitStatus != 0 ) {
+        ++count_removeInnerHits
+        if ( hasInnerHitStatus & flag+/- ) {
+            recoTrack+/-_forRefit = copyRecoTrack(recoTrack+/-)
+            if ( copy failed ) return false
+            break if not removeInnerHits(
+                prevRecoTrack: cache_recoTrack+/- if not null else recoTrack+/-,
+                recoTrack: recoTrack+/-_forRefit,
+                pdg+/-,
+                vertexPosition
+                ) {
+                
+                particleUsedForFitting = ChargedStable(pdg)
+                prevTrackRep = prevRecoTrack.getTrackRepForPDG(pdg)
+                hitInfo = recoTrack.getRecoHitInfo(sorted: true)
+                prev_hitInfo = prevTrack.getRecoHitInfo(sorted: true)
+
+                nRemoveHits = 0
+                
+                return false if ( hitInfo.size != prev_hitInfo.size )
+
+                for i < hitInfo.size {
+                    
+                }
+
+                }     
+            cache_recoTrack+/- = recoTrack+/-_forRefit
+        } elif ( recoTrack+/-_forRefit == null ) {
+            recoTrack+/-forReift = copyRecoTrackAndFit(
+                recoTrack+/-,
+                pdg+/-
+            ) {...}
+            if ( failed ) return false
         }
-
-        state+/- = copy(recoTrack+/-.stateFromFirstHit(trackRep+/-))
-
-        vertex;
-
-        return false if not 
-        fitGFRaveVertex(
-            &gfTrack+/-,
-            &vertex
-            ) {
-            vertexVector;
-            trackPair = {&gfTrack+, &gfTrack-}
-            vertexFactory.findVertices(&vertexVector, trackPair)
-
-            if ( error or not fit successful ) return false
-            else {
-                vertex = vertexVector[0]
-                return true
-            }
-        }
         
-        vertexPos = vertex.getPos()
+        hasInnerHitStatus = 0;
+        vertexFitWithRecoTracks(
+            track+/-,
+            recoTrack+/-_forRefit,
+            v0Hypothesis,
+            hasInnerHitStatus,
+            vertexPos,
+            forceStore: false
+        )
+        if ( failed ) failflag = true, break
+        elif ( hasInnerHitStatus == 0 ) isHitRemoved = true 
 
-        if ( vertex doesnt pass cuts )
-            return false
-
-        return false if not
-        extrapolateToVertex(
-            &state+/-,
-            &vertexPos,
-            &hasInnerHitStatus
-            ) {
-                hasInnerHitStatus = 0
-                len+/- = state+/-.extrapolateToPoint(vertexPos)
-                if ( len+/- > 0 ) set hasInnerHitStatus bits
-                if ( error ) return false
-                return true
-            }
-
-        if (
-            forceStore or
-            hasInnerHitStatus == 0
-        ) {
-            
-        }
-
+        if ( count_removeInnerHits >= 5 ) failflag = true, break
     }
 
-        
-        
+    if ( not failflag ) return true
+
+    return false if not vertexFitWithRecoTracks(
+        track+/-,
+        recoTrack+/-,
+        v0Hypothesis,
+        hasInnerHitStatus,
+        vertexPos,
+        forcestore = true
+    )
+
+    isForceStored = true
+    return true
+}
+
+
+
+vertexFitWithRecoTracks(
+    const *track+/-,
+    *recoTrack+/-
+    &v0Hypothesis,
+    &hasInnerHitStatus,
+    &vertexPos,
+    m_forcestore
+    ) {
+    trackHypotheses = (particleHypTrack1, particleHypTrack2) = getTrackHypotheses(v0Hypothesis)
+
+    int pdg+/- = track+/-.getTrackFitResultWithClosestMass(particleHypTrack1/2).pdgCode()
+    
+    trackRep+/- = recoTrack+/-.getTrackRepForPdg(pdg+/-)
+    
+    if (
+        not trackRep+/- or
+        not recoTrack+/-.fitSuccessful(trackRep+/-)
+    ) throw error, return
+
+    gfTrack+/- = copy(recoTrack+/-.get_genfit())
+
+    gfTrackReps+/- = gfTrack+/-.getTrackReps
+
+    for rep+/- in trackReps+/- {
+        if ( rep+/-.pdg == pdg+/- )
+            gfTrack+/-.setCardinalRep(rep+/-)
+    }
+
+    state+/- = copy(recoTrack+/-.stateFromFirstHit(trackRep+/-))
+
+    vertex;
+
+    return false if not 
+    fitGFRaveVertex(
+        &gfTrack+/-,
+        &vertex
+        ) {
+        vertexVector;
+        trackPair = {&gfTrack+, &gfTrack-}
+        vertexFactory.findVertices(&vertexVector, trackPair)
+
+        if ( error or not fit successful ) return false
+        else {
+            vertex = vertexVector[0]
+            return true
+        }
+    }
+    
+    vertexPos = vertex.getPos()
+
+    if ( vertex doesnt pass cuts )
+        return false
+
+    return false if not
+    extrapolateToVertex(
+        &state+/-,
+        &vertexPos,
+        &hasInnerHitStatus
+        ) {
+            hasInnerHitStatus = 0
+            len+/- = state+/-.extrapolateToPoint(vertexPos)
+            if ( len+/- > 0 ) set hasInnerHitStatus bits
+            if ( error ) return false
+            return true
+        }
+
+    if (
+        forceStore or
+        hasInnerHitStatus == 0
+    ) {
+        trackParams0/1 = vertex.getParameters(0/1)
+        lorentzVector0/1 = rootPxP<PzMVector(
+            trackParams0/1.getMom().Px(), .Py(), .Pz(),
+            particleTrackHyp0/1.getMass() 
+        )
+
+        v0InvMass = (lorentzVector 0 + 1).M()
+
+        if ( v0InvMass and v0Hypothesis.invMassRange not overlap ) return false
+
+        Bz = BFieldManager.getFieldInTesla(0,0,0).Z()
+
+        sharedInnermostCluster = checkSharedInnermostCluster(
+            recoTrack+/-
+            ) {
+            flag = 0
+            hitInfo+/- = recoTrack+/-.getRecoHitInformation(sorted=true)
+
+            iFirstHit+/- = 0
+            # get first hit of reco tracks used in fit
+            for i, hit in hitInfo+/- {
+                iFirstHit+/- = i
+                if ( hit.useInFit() ) break
+            }
+
+            if ( iFirstHit+/- == hitInfo+/-.size() ) // no hit used in fit
+                return -1
+
+            firstHitInfo+/- = hitInfo+/-[iFirstHit+/-]
+
+            if not ( firstHitInfo+.detector == firstHitInfo-.detector ) return 0
+
+            if ( firstHitInfo.detector == PXD ) {
+                cluster+/- = firstHitInfo+/-.getRelated(PXDCluster)
+                if ( cluster+ == cluster- ) flag = 3
+            }
+            elif ( firstHitInfo.detector == SVD ) {
+                cluster+/- = firstHitInfo+/-.getRelated(SVDCluster)
+                if ( 
+                    not cluster+/-.isUCluster() or
+                    not iFirstHit+/- + 1 < hitInfo+/-.size
+                ) return -1
+                
+                nextHitInfo+/- = hitInfo+/-[iFirstHit+/- + 1]
+
+                if not (
+                    nextHitInfo+/-.useInFit() and 
+                    nextHitInfo.detector == SVD
+                ) return -1
+
+                clusterNext+/- = nextHitInfo+/-.getRelated(SVDCluster)
+
+                if ( 
+                    not clusterNext+/-.isUCluster and // next clusters are V clusters
+                    cluster+/-.sensorID() == clusterNext+/-.sensorID() 
+                ) {
+                    if ( cluster+ == cluster- ) flag += 2
+                    if ( clusterNext+ == clusterNext- ) flag += 1
+                } else return -1
+            }
+
+            return flag
+        }
+
+        fitResVertex+/- = buildTrackFitResult(
+            gfTrack+/-,
+            recoTrack+/-,
+            state+/-,
+            Bz,
+            particleHypTrack1/2,
+            sharedInnermostCluster
+            ) {
+
+            hitCDCInit = TrackBuilder.getHitPatternCDCInitializer(recoTrack)
+            hitVXDInit = TrackBuilder.getHitPatternVXDInitializer(recoTrack)
+
+            // innermost hit shared among V0 daughters
+            if ( 0 < sharedInnermostCluster < 4) {
+                hitVXDflag = HitPatternVXD(hitVXDInit)
+                hitVXDflag.setInnermostHitShareStatus(sharedInnermostCluster)
+                hitVXDInit = hitVXDflag.getInteger()
+            }
+
+            v0TrackFitResult = m_trackFitResults.appendNew(
+                state.getPos(), // pos near perigee
+                state.getMom(), // mom near perigee
+                state.get6DCov(), // cov matrix for pos, mom
+                state.getCharge(), // particle charge
+                particleHypTrack, // particle type used for track fit mass hyp
+                gfTrack.fitStatus.PVal, // track fit p value
+                Bz, // magnetic field for curvature
+                hitCDCInit, // bits for init of CDC hit pattern
+                hitVXDInit, // bits for init of VXD hit pattern
+                gfTrack.fitStatus.Ndf // ndf of fit
+            )
+            
+            return V0TrackFitResult
+        }
+
+        v0 = m_v0s.appendNew(
+            (track+/-, fitRes+/-),
+            vertexPos.X, .Y, .Z
+        )
+
+        if ( m_validation ) {
+            validationV0 = m_validationV0s.appendNew(
+                (track+/-, fitRes+/-),
+                vertex.getPos(), // fitted vertex position
+                vertex.getCov(), // covariance of vertex position
+                // reconstructed momentum and inv. mass
+                (lorentzVector0 + lorentVector1).P(),
+                .M(),
+                vertex.getChi2() // chi2 of vertex fit
+            )
+            v0.addRelationTo(validationV0)
+        }
+
+        return true
+    }
 
 }
