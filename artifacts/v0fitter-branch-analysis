@@ -1,0 +1,153 @@
+1.------------
+k = 1
+innerhits = true
+
+NEW
+reco_k_1 = ptr := copy(reco_0)
+reco_k = null
+
+reco_k_1 = null
+reco_k = ptr
+removeInnerHits(
+    prev: reco_k_1 or reco_0 = reco_0
+    reco: reco_k
+)
+
+reco_k = ptr*
+reco_k_1 = null
+
+OLD
+reco_k_1 = null
+reco_k = null
+
+reco_k = ptr := copy(reco_0)
+removeInnerHIts(
+    prev: reco_k_1 or reco_0 = reco_0
+    reco: reco_k
+)
+
+reco_k = ptr*
+reco_k_1 = reco_k = ptr*
+
+
+
+2.------------
+k = 1
+innerhits = false
+
+NEW
+reco_k_1 = ptr := copy(reco_0)
+reco_k = null
+
+reco_k_1 = null
+reco_k = ptr
+fit(reco_k)
+
+reco_k = ptr*
+reco_k_1 = null
+
+OLD
+reco_k_1 = null
+reco_k = null
+
+reco_k = ptr := copy(reco_0)
+fit(reco_k)
+
+reco_k = ptr*
+reco_k_1 = null
+
+
+3.------------
+k > 1
+innerhits_prev = true
+innerhits = true
+
+NEW
+reco_k_1 = undef
+reco_k = ptr1
+
+reco_k_1 = ptr1
+reco_k = undef
+reco_k = ptr2 := reco_k or copy(reco_0)
+
+removeInnerHits(
+    prev: reco_k_1 or reco_0 = reco_k_1
+    reco: reco_k
+)
+
+reco_k = ptr2*
+reco_k_1 = ptr1
+
+OLD
+reco_k_1 = ptr1 := reco_k
+reco_k = ptr2 := copy(reco_0)
+
+removeInnerHits(
+    prev: reco_k_1 or reco_0 = reco_k_1
+    reco: reco_k
+)
+
+reco_k = ptr2*
+reco_k_1 = reco_k = ptr2*
+
+
+4.------------
+k > 1
+innerhits_prev = false
+innerhits = true
+
+NEW
+reco_k_1 = undef
+reco_k = ptr1
+
+reco_k_1 = ptr1
+reco_k = undef
+reco_k = ptr2 := reco_k or copy(reco_0)
+
+removeInnerHits(
+    prev: reco_k_1 or reco_0 = reco_k_1
+    reco: reco_k
+)
+
+reco_k = ptr2*
+reco_k_1 = ptr1
+
+OLD
+reco_k_1 = undef
+reco_k = ptr := copy(reco_0)
+
+removeInnerHits(
+    prev: reco_k_1 or reco_0
+    reco: ptr
+)
+
+reco_k = ptr*
+reco_k_1 = reco_k = ptr*
+
+
+5.------------
+k > 1
+innerhits_prev = true
+innerhits = false
+
+Nothing
+
+6.------------
+k > 1
+innerhits_prev = false
+innerhits = false
+
+Nothing
+
+
+while inner hits
+    remove inner hits
+    refit track with hits removed
+    refit vertex with newly fitted tracks
+
+
+since copying the reco track doesnt copy the hits 
+
+
+genfit2/code2/GFRave/src/GFRaveConverters.cc:68
+state of original tracks not altered by vertexing
