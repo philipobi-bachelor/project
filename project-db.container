@@ -1,0 +1,17 @@
+[Unit]
+Description = Database for the project
+Requires = project-network.service
+After = project-network.service
+
+[Container]
+ContainerName = project-db
+Image = arangodb:3.12.4
+Exec = arangod --server.authentication=false --server.endpoint=tcp://0.0.0.0:8529
+PublishPort = 8529:8529
+Network = project-network
+Volume = /project/agkuhr/users/pobi/project-db:/var/lib/arangodb3
+
+# username: "root", password: "" (important especially for python-arango authentification)
+
+[Install]
+WantedBy = default.target

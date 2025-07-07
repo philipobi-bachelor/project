@@ -1,0 +1,9 @@
+[Unit]
+Description = Common bridge network for project containers
+
+[Network]
+NetworkName = project-network
+Driver = bridge
+
+[Install]
+WantedBy = default.target
