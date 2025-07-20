@@ -1,7 +1,6 @@
 import os
-from pprint import pprint
 
-def readlines_reversed(path, bufsiz=8192):
+def readlinesReversed(path, bufsiz=8192):
     # based on https://stackoverflow.com/a/23646049
     with open(path, "rb") as f:
         pos = f.seek(0, os.SEEK_END)
