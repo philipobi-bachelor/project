@@ -1,4 +1,5 @@
 import pandas as pd
+
 if __name__ == "__main__":
 
     [df] = pd.read_html("livebench.html")
@@ -11,11 +12,9 @@ if __name__ == "__main__":
         index=False,
     )
 
+    [df] = pd.read_html("lmarena.html")
 
-    df.sort_values(
-        "Agentic Coding Average",
-        ascending=False,
-    ).to_csv(
-        "livebench-agentic-coding.csv",
+    df.sort_values("Coding").to_csv(
+        "lmarena-coding.csv",
         index=False,
     )
