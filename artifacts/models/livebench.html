@@ -4,10 +4,10 @@
         <tr>
             <th class="sticky-col default">Model</th>
             <th class="sticky-col organization-col default">Organization</th>
-            <th class="sticky-col globalAverage-col default">Global Average</th>
+            <th class="sticky-col globalAverage-col down">Global Average</th>
             <th class="default">Reasoning Average</th>
             <th class="default">Coding Average</th>
-            <th class="down">Agentic Coding Average</th>
+            <th class="default">Agentic Coding Average</th>
             <th class="default">Mathematics Average</th>
             <th class="default">Data Analysis Average</th>
             <th class="default">Language Average</th>
@@ -15,6 +15,19 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://platform.openai.com/docs/models/o3-pro" target="_blank"
+                    rel="noopener noreferrer">o3 Pro High</a></td>
+            <td class="sticky-col organization-col">OpenAI</td>
+            <td class="sticky-col globalAverage-col">74.72</td>
+            <td>94.67</td>
+            <td>76.78</td>
+            <td>31.67</td>
+            <td>84.75</td>
+            <td>69.40</td>
+            <td>79.88</td>
+            <td>85.87</td>
+        </tr>
         <tr>
             <td class="sticky-col model-col"><a href="https://openai.com/index/introducing-o3-and-o4-mini/"
                     target="_blank" rel="noopener noreferrer">o3 High</a></td>
@@ -42,30 +55,17 @@
             <td>80.74</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/claude-4" target="_blank"
-                    rel="noopener noreferrer">Claude 4 Opus</a></td>
-            <td class="sticky-col organization-col">Anthropic</td>
-            <td class="sticky-col globalAverage-col">65.93</td>
-            <td>56.44</td>
-            <td>73.58</td>
-            <td>31.67</td>
-            <td>78.79</td>
-            <td>66.51</td>
-            <td>76.11</td>
-            <td>78.38</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://platform.openai.com/docs/models/o3-pro" target="_blank"
-                    rel="noopener noreferrer">o3 Pro High</a></td>
-            <td class="sticky-col organization-col">OpenAI</td>
-            <td class="sticky-col globalAverage-col">74.72</td>
-            <td>94.67</td>
-            <td>76.78</td>
-            <td>31.67</td>
-            <td>84.75</td>
-            <td>69.40</td>
-            <td>79.88</td>
-            <td>85.87</td>
+            <td class="sticky-col model-col"><a href="https://docs.x.ai/docs/models/grok-4-0709" target="_blank"
+                    rel="noopener noreferrer">Grok 4</a></td>
+            <td class="sticky-col organization-col">xAI</td>
+            <td class="sticky-col globalAverage-col">72.11</td>
+            <td>97.78</td>
+            <td>71.34</td>
+            <td>23.33</td>
+            <td>88.84</td>
+            <td>69.53</td>
+            <td>75.83</td>
+            <td>78.12</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/claude-4" target="_blank"
@@ -107,110 +107,6 @@
             <td>84.96</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-0528"
-                    target="_blank" rel="noopener noreferrer">DeepSeek R1 (2025-05-28)</a></td>
-            <td class="sticky-col organization-col">DeepSeek</td>
-            <td class="sticky-col globalAverage-col">70.10</td>
-            <td>91.08</td>
-            <td>71.40</td>
-            <td>26.67</td>
-            <td>85.26</td>
-            <td>71.54</td>
-            <td>64.82</td>
-            <td>79.95</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank"
-                    rel="noopener noreferrer">Claude 3.7 Sonnet Thinking</a></td>
-            <td class="sticky-col organization-col">Anthropic</td>
-            <td class="sticky-col globalAverage-col">67.43</td>
-            <td>76.17</td>
-            <td>73.19</td>
-            <td>25.00</td>
-            <td>79.00</td>
-            <td>69.11</td>
-            <td>68.27</td>
-            <td>81.25</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/claude-4" target="_blank"
-                    rel="noopener noreferrer">Claude 4 Sonnet</a></td>
-            <td class="sticky-col organization-col">Anthropic</td>
-            <td class="sticky-col globalAverage-col">63.37</td>
-            <td>54.86</td>
-            <td>78.25</td>
-            <td>25.00</td>
-            <td>76.39</td>
-            <td>64.68</td>
-            <td>67.18</td>
-            <td>77.25</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://qwenlm.github.io/blog/qwen3-coder/" target="_blank"
-                    rel="noopener noreferrer">Qwen 3 Coder 480B A35B Instruct</a></td>
-            <td class="sticky-col organization-col">Alibaba</td>
-            <td class="sticky-col globalAverage-col">60.45</td>
-            <td>54.58</td>
-            <td>73.19</td>
-            <td>25.00</td>
-            <td>67.28</td>
-            <td>64.68</td>
-            <td>64.26</td>
-            <td>74.16</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://docs.x.ai/docs/models/grok-4-0709" target="_blank"
-                    rel="noopener noreferrer">Grok 4</a></td>
-            <td class="sticky-col organization-col">xAI</td>
-            <td class="sticky-col globalAverage-col">72.11</td>
-            <td>97.78</td>
-            <td>71.34</td>
-            <td>23.33</td>
-            <td>88.84</td>
-            <td>69.53</td>
-            <td>75.83</td>
-            <td>78.12</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank"
-                    rel="noopener noreferrer">Claude 3.7 Sonnet</a></td>
-            <td class="sticky-col organization-col">Anthropic</td>
-            <td class="sticky-col globalAverage-col">58.48</td>
-            <td>49.11</td>
-            <td>74.28</td>
-            <td>21.67</td>
-            <td>64.65</td>
-            <td>59.96</td>
-            <td>63.19</td>
-            <td>76.49</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://openai.com/index/introducing-o3-and-o4-mini/"
-                    target="_blank" rel="noopener noreferrer">o4-Mini Medium</a></td>
-            <td class="sticky-col organization-col">OpenAI</td>
-            <td class="sticky-col globalAverage-col">66.87</td>
-            <td>78.47</td>
-            <td>74.22</td>
-            <td>21.67</td>
-            <td>81.02</td>
-            <td>68.47</td>
-            <td>62.41</td>
-            <td>81.83</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1" target="_blank"
-                    rel="noopener noreferrer">DeepSeek R1</a></td>
-            <td class="sticky-col organization-col">DeepSeek</td>
-            <td class="sticky-col globalAverage-col">65.15</td>
-            <td>77.17</td>
-            <td>76.07</td>
-            <td>20.00</td>
-            <td>77.91</td>
-            <td>69.63</td>
-            <td>54.77</td>
-            <td>80.51</td>
-        </tr>
-        <tr>
             <td class="sticky-col model-col"><a
                     href="https://blog.google/products/gemini/gemini-2-5-pro-latest-preview/" target="_blank"
                     rel="noopener noreferrer">Gemini 2.5 Pro (Max Thinking)</a></td>
@@ -225,110 +121,17 @@
             <td>77.35</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://huggingface.co/moonshotai/Kimi-K2-Instruct"
-                    target="_blank" rel="noopener noreferrer">Kimi K2 Instruct</a></td>
-            <td class="sticky-col organization-col">Moonshot AI</td>
-            <td class="sticky-col globalAverage-col">62.70</td>
-            <td>62.97</td>
-            <td>71.78</td>
-            <td>20.00</td>
-            <td>74.41</td>
-            <td>63.41</td>
-            <td>63.85</td>
-            <td>82.47</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a
-                    href="https://blog.google/technology/google-deepmind/google-gemini-updates-io-2025/#flash-improvements"
-                    target="_blank" rel="noopener noreferrer">Gemini 2.5 Flash</a></td>
-            <td class="sticky-col organization-col">Google</td>
-            <td class="sticky-col globalAverage-col">64.42</td>
-            <td>78.53</td>
-            <td>63.53</td>
-            <td>18.33</td>
-            <td>84.10</td>
-            <td>69.85</td>
-            <td>57.04</td>
-            <td>79.56</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/3-5-models-and-computer-use"
-                    target="_blank" rel="noopener noreferrer">Claude 3.5 Sonnet</a></td>
-            <td class="sticky-col organization-col">Anthropic</td>
-            <td class="sticky-col globalAverage-col">51.80</td>
-            <td>43.22</td>
-            <td>73.90</td>
-            <td>15.00</td>
-            <td>50.54</td>
-            <td>56.19</td>
-            <td>54.48</td>
-            <td>69.30</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://huggingface.co/deepseek-ai/DeepSeek-V3-0324"
-                    target="_blank" rel="noopener noreferrer">DeepSeek V3.1</a></td>
+            <td class="sticky-col model-col"><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-0528"
+                    target="_blank" rel="noopener noreferrer">DeepSeek R1 (2025-05-28)</a></td>
             <td class="sticky-col organization-col">DeepSeek</td>
-            <td class="sticky-col globalAverage-col">55.99</td>
-            <td>44.28</td>
-            <td>68.91</td>
-            <td>15.00</td>
-            <td>71.44</td>
-            <td>64.02</td>
-            <td>46.82</td>
-            <td>81.47</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://openai.com/index/introducing-gpt-4-5/" target="_blank"
-                    rel="noopener noreferrer">GPT-4.5 Preview</a></td>
-            <td class="sticky-col organization-col">OpenAI</td>
-            <td class="sticky-col globalAverage-col">58.65</td>
-            <td>54.42</td>
-            <td>76.07</td>
-            <td>15.00</td>
-            <td>67.94</td>
-            <td>60.07</td>
-            <td>64.76</td>
-            <td>72.33</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://x.ai/blog/grok-3" target="_blank"
-                    rel="noopener noreferrer">Grok 3 Mini Beta (High)</a></td>
-            <td class="sticky-col organization-col">xAI</td>
-            <td class="sticky-col globalAverage-col">62.36</td>
-            <td>87.61</td>
-            <td>54.52</td>
-            <td>15.00</td>
-            <td>77.00</td>
-            <td>64.58</td>
-            <td>59.09</td>
-            <td>78.70</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://mistral.ai/news/mistral-medium-3" target="_blank"
-                    rel="noopener noreferrer">Mistral Medium 3</a></td>
-            <td class="sticky-col organization-col">Mistral AI</td>
-            <td class="sticky-col globalAverage-col">50.65</td>
-            <td>41.97</td>
-            <td>61.48</td>
-            <td>15.00</td>
-            <td>59.74</td>
-            <td>60.20</td>
-            <td>44.74</td>
+            <td class="sticky-col globalAverage-col">70.10</td>
+            <td>91.08</td>
             <td>71.40</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a
-                    href="https://x.com/OpenAIDevs/status/1905335104211185999?t=pmYR2_xGFyWs1xOGuNxRsw&amp;s=19"
-                    target="_blank" rel="noopener noreferrer">ChatGPT-4o</a></td>
-            <td class="sticky-col organization-col">OpenAI</td>
-            <td class="sticky-col globalAverage-col">54.74</td>
-            <td>48.81</td>
-            <td>77.48</td>
-            <td>13.33</td>
-            <td>55.72</td>
-            <td>66.52</td>
-            <td>49.43</td>
-            <td>71.92</td>
+            <td>26.67</td>
+            <td>85.26</td>
+            <td>71.54</td>
+            <td>64.82</td>
+            <td>79.95</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a
@@ -345,43 +148,56 @@
             <td>78.54</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://openai.com/index/gpt-4-1/" target="_blank"
-                    rel="noopener noreferrer">GPT-4.1</a></td>
-            <td class="sticky-col organization-col">OpenAI</td>
-            <td class="sticky-col globalAverage-col">55.90</td>
-            <td>44.39</td>
+            <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank"
+                    rel="noopener noreferrer">Claude 3.7 Sonnet Thinking</a></td>
+            <td class="sticky-col organization-col">Anthropic</td>
+            <td class="sticky-col globalAverage-col">67.43</td>
+            <td>76.17</td>
             <td>73.19</td>
-            <td>13.33</td>
-            <td>62.39</td>
-            <td>66.40</td>
-            <td>54.55</td>
-            <td>77.05</td>
+            <td>25.00</td>
+            <td>79.00</td>
+            <td>69.11</td>
+            <td>68.27</td>
+            <td>81.25</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://x.ai/blog/grok-3" target="_blank"
-                    rel="noopener noreferrer">Grok 3 Beta</a></td>
-            <td class="sticky-col organization-col">xAI</td>
-            <td class="sticky-col globalAverage-col">56.05</td>
-            <td>48.53</td>
+            <td class="sticky-col model-col"><a href="https://openai.com/index/introducing-o3-and-o4-mini/"
+                    target="_blank" rel="noopener noreferrer">o4-Mini Medium</a></td>
+            <td class="sticky-col organization-col">OpenAI</td>
+            <td class="sticky-col globalAverage-col">66.87</td>
+            <td>78.47</td>
+            <td>74.22</td>
+            <td>21.67</td>
+            <td>81.02</td>
+            <td>68.47</td>
+            <td>62.41</td>
+            <td>81.83</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/claude-4" target="_blank"
+                    rel="noopener noreferrer">Claude 4 Opus</a></td>
+            <td class="sticky-col organization-col">Anthropic</td>
+            <td class="sticky-col globalAverage-col">65.93</td>
+            <td>56.44</td>
             <td>73.58</td>
-            <td>13.33</td>
-            <td>62.75</td>
-            <td>55.63</td>
-            <td>53.80</td>
-            <td>84.74</td>
+            <td>31.67</td>
+            <td>78.79</td>
+            <td>66.51</td>
+            <td>76.11</td>
+            <td>78.38</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507"
-                    target="_blank" rel="noopener noreferrer">Qwen 3 235B A22B Instruct 2507</a></td>
-            <td class="sticky-col organization-col">Alibaba</td>
-            <td class="sticky-col globalAverage-col">64.72</td>
-            <td>86.89</td>
-            <td>66.41</td>
-            <td>13.33</td>
-            <td>79.18</td>
-            <td>65.24</td>
-            <td>66.29</td>
-            <td>75.70</td>
+            <td class="sticky-col model-col"><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1" target="_blank"
+                    rel="noopener noreferrer">DeepSeek R1</a></td>
+            <td class="sticky-col organization-col">DeepSeek</td>
+            <td class="sticky-col globalAverage-col">65.15</td>
+            <td>77.17</td>
+            <td>76.07</td>
+            <td>20.00</td>
+            <td>77.91</td>
+            <td>69.63</td>
+            <td>54.77</td>
+            <td>80.51</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a href="https://qwenlm.github.io/blog/qwen3/" target="_blank"
@@ -397,17 +213,31 @@
             <td>87.73</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://qwenlm.github.io/blog/qwen3/" target="_blank"
-                    rel="noopener noreferrer">Qwen 3 30B A3B</a></td>
+            <td class="sticky-col model-col"><a href="https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507"
+                    target="_blank" rel="noopener noreferrer">Qwen 3 235B A22B Instruct 2507</a></td>
             <td class="sticky-col organization-col">Alibaba</td>
-            <td class="sticky-col globalAverage-col">59.02</td>
-            <td>71.31</td>
-            <td>47.47</td>
-            <td>11.67</td>
-            <td>76.65</td>
-            <td>66.60</td>
-            <td>56.24</td>
-            <td>83.23</td>
+            <td class="sticky-col globalAverage-col">64.72</td>
+            <td>86.89</td>
+            <td>66.41</td>
+            <td>13.33</td>
+            <td>79.18</td>
+            <td>65.24</td>
+            <td>66.29</td>
+            <td>75.70</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a
+                    href="https://blog.google/technology/google-deepmind/google-gemini-updates-io-2025/#flash-improvements"
+                    target="_blank" rel="noopener noreferrer">Gemini 2.5 Flash</a></td>
+            <td class="sticky-col organization-col">Google</td>
+            <td class="sticky-col globalAverage-col">64.42</td>
+            <td>78.53</td>
+            <td>63.53</td>
+            <td>18.33</td>
+            <td>84.10</td>
+            <td>69.85</td>
+            <td>57.04</td>
+            <td>79.56</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a href="https://qwenlm.github.io/blog/qwen3/" target="_blank"
@@ -423,56 +253,95 @@
             <td>85.17</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://openai.com/index/hello-gpt-4o/" target="_blank"
-                    rel="noopener noreferrer">GPT-4o</a></td>
-            <td class="sticky-col organization-col">OpenAI</td>
-            <td class="sticky-col globalAverage-col">47.43</td>
-            <td>39.75</td>
-            <td>69.29</td>
-            <td>8.33</td>
-            <td>41.48</td>
-            <td>63.53</td>
-            <td>44.68</td>
-            <td>64.94</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://mistral.ai/news/mistral-small-3-1" target="_blank"
-                    rel="noopener noreferrer">Mistral Small</a></td>
-            <td class="sticky-col organization-col">Mistral AI</td>
-            <td class="sticky-col globalAverage-col">40.55</td>
-            <td>37.08</td>
-            <td>49.65</td>
-            <td>8.33</td>
-            <td>38.39</td>
-            <td>52.14</td>
-            <td>34.59</td>
-            <td>63.66</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://www.anthropic.com/claude/haiku" target="_blank"
-                    rel="noopener noreferrer">Claude 3.5 Haiku</a></td>
+            <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/claude-4" target="_blank"
+                    rel="noopener noreferrer">Claude 4 Sonnet</a></td>
             <td class="sticky-col organization-col">Anthropic</td>
-            <td class="sticky-col globalAverage-col">39.51</td>
-            <td>26.19</td>
-            <td>53.17</td>
-            <td>6.67</td>
-            <td>34.84</td>
-            <td>54.12</td>
-            <td>39.71</td>
-            <td>61.88</td>
+            <td class="sticky-col globalAverage-col">63.37</td>
+            <td>54.86</td>
+            <td>78.25</td>
+            <td>25.00</td>
+            <td>76.39</td>
+            <td>64.68</td>
+            <td>67.18</td>
+            <td>77.25</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B"
-                    target="_blank" rel="noopener noreferrer">DeepSeek R1 Distill Llama 70B</a></td>
-            <td class="sticky-col organization-col">DeepSeek</td>
-            <td class="sticky-col globalAverage-col">48.53</td>
-            <td>59.81</td>
-            <td>46.65</td>
-            <td>6.67</td>
-            <td>58.80</td>
-            <td>60.81</td>
-            <td>37.05</td>
-            <td>69.94</td>
+            <td class="sticky-col model-col"><a href="https://huggingface.co/moonshotai/Kimi-K2-Instruct"
+                    target="_blank" rel="noopener noreferrer">Kimi K2 Instruct</a></td>
+            <td class="sticky-col organization-col">Moonshot AI</td>
+            <td class="sticky-col globalAverage-col">62.70</td>
+            <td>62.97</td>
+            <td>71.78</td>
+            <td>20.00</td>
+            <td>74.41</td>
+            <td>63.41</td>
+            <td>63.85</td>
+            <td>82.47</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://x.ai/blog/grok-3" target="_blank"
+                    rel="noopener noreferrer">Grok 3 Mini Beta (High)</a></td>
+            <td class="sticky-col organization-col">xAI</td>
+            <td class="sticky-col globalAverage-col">62.36</td>
+            <td>87.61</td>
+            <td>54.52</td>
+            <td>15.00</td>
+            <td>77.00</td>
+            <td>64.58</td>
+            <td>59.09</td>
+            <td>78.70</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://qwenlm.github.io/blog/qwen3-coder/" target="_blank"
+                    rel="noopener noreferrer">Qwen 3 Coder 480B A35B Instruct</a></td>
+            <td class="sticky-col organization-col">Alibaba</td>
+            <td class="sticky-col globalAverage-col">60.45</td>
+            <td>54.58</td>
+            <td>73.19</td>
+            <td>25.00</td>
+            <td>67.28</td>
+            <td>64.68</td>
+            <td>64.26</td>
+            <td>74.16</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://qwenlm.github.io/blog/qwen3/" target="_blank"
+                    rel="noopener noreferrer">Qwen 3 30B A3B</a></td>
+            <td class="sticky-col organization-col">Alibaba</td>
+            <td class="sticky-col globalAverage-col">59.02</td>
+            <td>71.31</td>
+            <td>47.47</td>
+            <td>11.67</td>
+            <td>76.65</td>
+            <td>66.60</td>
+            <td>56.24</td>
+            <td>83.23</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://openai.com/index/introducing-gpt-4-5/" target="_blank"
+                    rel="noopener noreferrer">GPT-4.5 Preview</a></td>
+            <td class="sticky-col organization-col">OpenAI</td>
+            <td class="sticky-col globalAverage-col">58.65</td>
+            <td>54.42</td>
+            <td>76.07</td>
+            <td>15.00</td>
+            <td>67.94</td>
+            <td>60.07</td>
+            <td>64.76</td>
+            <td>72.33</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank"
+                    rel="noopener noreferrer">Claude 3.7 Sonnet</a></td>
+            <td class="sticky-col organization-col">Anthropic</td>
+            <td class="sticky-col globalAverage-col">58.48</td>
+            <td>49.11</td>
+            <td>74.28</td>
+            <td>21.67</td>
+            <td>64.65</td>
+            <td>59.96</td>
+            <td>63.19</td>
+            <td>76.49</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a href="https://deepmind.google/models/gemini/flash-lite/" target="_blank"
@@ -488,6 +357,85 @@
             <td>84.17</td>
         </tr>
         <tr>
+            <td class="sticky-col model-col"><a href="https://x.ai/blog/grok-3" target="_blank"
+                    rel="noopener noreferrer">Grok 3 Beta</a></td>
+            <td class="sticky-col organization-col">xAI</td>
+            <td class="sticky-col globalAverage-col">56.05</td>
+            <td>48.53</td>
+            <td>73.58</td>
+            <td>13.33</td>
+            <td>62.75</td>
+            <td>55.63</td>
+            <td>53.80</td>
+            <td>84.74</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://huggingface.co/deepseek-ai/DeepSeek-V3-0324"
+                    target="_blank" rel="noopener noreferrer">DeepSeek V3.1</a></td>
+            <td class="sticky-col organization-col">DeepSeek</td>
+            <td class="sticky-col globalAverage-col">55.99</td>
+            <td>44.28</td>
+            <td>68.91</td>
+            <td>15.00</td>
+            <td>71.44</td>
+            <td>64.02</td>
+            <td>46.82</td>
+            <td>81.47</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://openai.com/index/gpt-4-1/" target="_blank"
+                    rel="noopener noreferrer">GPT-4.1</a></td>
+            <td class="sticky-col organization-col">OpenAI</td>
+            <td class="sticky-col globalAverage-col">55.90</td>
+            <td>44.39</td>
+            <td>73.19</td>
+            <td>13.33</td>
+            <td>62.39</td>
+            <td>66.40</td>
+            <td>54.55</td>
+            <td>77.05</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a
+                    href="https://x.com/OpenAIDevs/status/1905335104211185999?t=pmYR2_xGFyWs1xOGuNxRsw&amp;s=19"
+                    target="_blank" rel="noopener noreferrer">ChatGPT-4o</a></td>
+            <td class="sticky-col organization-col">OpenAI</td>
+            <td class="sticky-col globalAverage-col">54.74</td>
+            <td>48.81</td>
+            <td>77.48</td>
+            <td>13.33</td>
+            <td>55.72</td>
+            <td>66.52</td>
+            <td>49.43</td>
+            <td>71.92</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://qwenlm.github.io/blog/qwen2.5-max/" target="_blank"
+                    rel="noopener noreferrer">Qwen2.5 Max</a></td>
+            <td class="sticky-col organization-col">Alibaba</td>
+            <td class="sticky-col globalAverage-col">51.93</td>
+            <td>38.53</td>
+            <td>66.79</td>
+            <td>3.33</td>
+            <td>56.87</td>
+            <td>64.27</td>
+            <td>58.37</td>
+            <td>75.35</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://www.anthropic.com/news/3-5-models-and-computer-use"
+                    target="_blank" rel="noopener noreferrer">Claude 3.5 Sonnet</a></td>
+            <td class="sticky-col organization-col">Anthropic</td>
+            <td class="sticky-col globalAverage-col">51.80</td>
+            <td>43.22</td>
+            <td>73.90</td>
+            <td>15.00</td>
+            <td>50.54</td>
+            <td>56.19</td>
+            <td>54.48</td>
+            <td>69.30</td>
+        </tr>
+        <tr>
             <td class="sticky-col model-col"><a href="https://openai.com/index/gpt-4-1/" target="_blank"
                     rel="noopener noreferrer">GPT-4.1 Mini</a></td>
             <td class="sticky-col organization-col">OpenAI</td>
@@ -501,30 +449,69 @@
             <td>70.31</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://cohere.com/blog/command-a" target="_blank"
-                    rel="noopener noreferrer">Command A</a></td>
-            <td class="sticky-col organization-col">Cohere</td>
-            <td class="sticky-col globalAverage-col">44.17</td>
-            <td>36.33</td>
-            <td>54.26</td>
-            <td>5.00</td>
-            <td>45.54</td>
-            <td>48.46</td>
-            <td>36.70</td>
-            <td>82.90</td>
+            <td class="sticky-col model-col"><a href="https://mistral.ai/news/mistral-medium-3" target="_blank"
+                    rel="noopener noreferrer">Mistral Medium 3</a></td>
+            <td class="sticky-col organization-col">Mistral AI</td>
+            <td class="sticky-col globalAverage-col">50.65</td>
+            <td>41.97</td>
+            <td>61.48</td>
+            <td>15.00</td>
+            <td>59.74</td>
+            <td>60.20</td>
+            <td>44.74</td>
+            <td>71.40</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
-                    target="_blank" rel="noopener noreferrer">DeepSeek R1 Distill Qwen 32B</a></td>
-            <td class="sticky-col organization-col">DeepSeek</td>
-            <td class="sticky-col globalAverage-col">41.44</td>
-            <td>44.36</td>
-            <td>47.03</td>
+            <td class="sticky-col model-col"><a href="https://huggingface.co/microsoft/Phi-4-reasoning-plus"
+                    target="_blank" rel="noopener noreferrer">Phi-4 Reasoning Plus</a></td>
+            <td class="sticky-col organization-col">Microsoft</td>
+            <td class="sticky-col globalAverage-col">49.27</td>
+            <td>57.83</td>
+            <td>60.59</td>
             <td>5.00</td>
-            <td>60.13</td>
-            <td>46.94</td>
-            <td>30.92</td>
-            <td>55.71</td>
+            <td>62.83</td>
+            <td>54.74</td>
+            <td>30.69</td>
+            <td>73.17</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B"
+                    target="_blank" rel="noopener noreferrer">DeepSeek R1 Distill Llama 70B</a></td>
+            <td class="sticky-col organization-col">DeepSeek</td>
+            <td class="sticky-col globalAverage-col">48.53</td>
+            <td>59.81</td>
+            <td>46.65</td>
+            <td>6.67</td>
+            <td>58.80</td>
+            <td>60.81</td>
+            <td>37.05</td>
+            <td>69.94</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/"
+                    target="_blank" rel="noopener noreferrer">Llama 4 Maverick 17B 128E Instruct</a></td>
+            <td class="sticky-col organization-col">Meta</td>
+            <td class="sticky-col globalAverage-col">47.78</td>
+            <td>43.83</td>
+            <td>54.19</td>
+            <td>3.33</td>
+            <td>60.58</td>
+            <td>47.11</td>
+            <td>49.65</td>
+            <td>75.75</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://openai.com/index/hello-gpt-4o/" target="_blank"
+                    rel="noopener noreferrer">GPT-4o</a></td>
+            <td class="sticky-col organization-col">OpenAI</td>
+            <td class="sticky-col globalAverage-col">47.43</td>
+            <td>39.75</td>
+            <td>69.29</td>
+            <td>8.33</td>
+            <td>41.48</td>
+            <td>63.53</td>
+            <td>44.68</td>
+            <td>64.94</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a
@@ -541,43 +528,17 @@
             <td>76.63</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://huggingface.co/microsoft/Phi-4-reasoning-plus"
-                    target="_blank" rel="noopener noreferrer">Phi-4 Reasoning Plus</a></td>
-            <td class="sticky-col organization-col">Microsoft</td>
-            <td class="sticky-col globalAverage-col">49.27</td>
-            <td>57.83</td>
-            <td>60.59</td>
+            <td class="sticky-col model-col"><a href="https://cohere.com/blog/command-a" target="_blank"
+                    rel="noopener noreferrer">Command A</a></td>
+            <td class="sticky-col organization-col">Cohere</td>
+            <td class="sticky-col globalAverage-col">44.17</td>
+            <td>36.33</td>
+            <td>54.26</td>
             <td>5.00</td>
-            <td>62.83</td>
-            <td>54.74</td>
-            <td>30.69</td>
-            <td>73.17</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://blog.google/technology/developers/gemma-3/"
-                    target="_blank" rel="noopener noreferrer">Gemma 3 27B</a></td>
-            <td class="sticky-col organization-col">Google</td>
-            <td class="sticky-col globalAverage-col">42.00</td>
-            <td>34.42</td>
-            <td>48.94</td>
-            <td>3.33</td>
-            <td>52.27</td>
-            <td>38.80</td>
-            <td>41.31</td>
-            <td>74.90</td>
-        </tr>
-        <tr>
-            <td class="sticky-col model-col"><a href="https://openai.com/index/gpt-4-1/" target="_blank"
-                    rel="noopener noreferrer">GPT-4.1 Nano</a></td>
-            <td class="sticky-col organization-col">OpenAI</td>
-            <td class="sticky-col globalAverage-col">40.51</td>
-            <td>35.58</td>
-            <td>63.92</td>
-            <td>3.33</td>
-            <td>42.39</td>
-            <td>49.82</td>
-            <td>30.96</td>
-            <td>57.54</td>
+            <td>45.54</td>
+            <td>48.46</td>
+            <td>36.70</td>
+            <td>82.90</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a href="https://cloud.tencent.com/document/product/1729/104753"
@@ -593,17 +554,17 @@
             <td>76.13</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/"
-                    target="_blank" rel="noopener noreferrer">Llama 4 Maverick 17B 128E Instruct</a></td>
-            <td class="sticky-col organization-col">Meta</td>
-            <td class="sticky-col globalAverage-col">47.78</td>
-            <td>43.83</td>
-            <td>54.19</td>
-            <td>3.33</td>
-            <td>60.58</td>
-            <td>47.11</td>
-            <td>49.65</td>
-            <td>75.75</td>
+            <td class="sticky-col model-col"><a href="https://huggingface.co/mistralai/Mistral-Large-Instruct-2411"
+                    target="_blank" rel="noopener noreferrer">Mistral Large</a></td>
+            <td class="sticky-col organization-col">Mistral AI</td>
+            <td class="sticky-col globalAverage-col">43.31</td>
+            <td>33.83</td>
+            <td>62.89</td>
+            <td>1.67</td>
+            <td>42.20</td>
+            <td>54.20</td>
+            <td>40.45</td>
+            <td>67.93</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a href="https://huggingface.co/Qwen/Qwen2.5-72B-Instruct" target="_blank"
@@ -619,43 +580,69 @@
             <td>64.39</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://qwenlm.github.io/blog/qwen2.5-max/" target="_blank"
-                    rel="noopener noreferrer">Qwen2.5 Max</a></td>
-            <td class="sticky-col organization-col">Alibaba</td>
-            <td class="sticky-col globalAverage-col">51.93</td>
-            <td>38.53</td>
-            <td>66.79</td>
+            <td class="sticky-col model-col"><a href="https://blog.google/technology/developers/gemma-3/"
+                    target="_blank" rel="noopener noreferrer">Gemma 3 27B</a></td>
+            <td class="sticky-col organization-col">Google</td>
+            <td class="sticky-col globalAverage-col">42.00</td>
+            <td>34.42</td>
+            <td>48.94</td>
             <td>3.33</td>
-            <td>56.87</td>
-            <td>64.27</td>
-            <td>58.37</td>
-            <td>75.35</td>
+            <td>52.27</td>
+            <td>38.80</td>
+            <td>41.31</td>
+            <td>74.90</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://docs.cohere.com/docs/models" target="_blank"
-                    rel="noopener noreferrer">Command R</a></td>
-            <td class="sticky-col organization-col">Cohere</td>
-            <td class="sticky-col globalAverage-col">27.15</td>
-            <td>20.58</td>
-            <td>26.10</td>
-            <td>1.67</td>
-            <td>18.35</td>
-            <td>39.77</td>
-            <td>27.93</td>
-            <td>55.62</td>
+            <td class="sticky-col model-col"><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
+                    target="_blank" rel="noopener noreferrer">DeepSeek R1 Distill Qwen 32B</a></td>
+            <td class="sticky-col organization-col">DeepSeek</td>
+            <td class="sticky-col globalAverage-col">41.44</td>
+            <td>44.36</td>
+            <td>47.03</td>
+            <td>5.00</td>
+            <td>60.13</td>
+            <td>46.94</td>
+            <td>30.92</td>
+            <td>55.71</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://docs.cohere.com/docs/models" target="_blank"
-                    rel="noopener noreferrer">Command R Plus</a></td>
-            <td class="sticky-col organization-col">Cohere</td>
-            <td class="sticky-col globalAverage-col">30.14</td>
-            <td>21.64</td>
-            <td>27.13</td>
-            <td>1.67</td>
-            <td>22.82</td>
-            <td>49.23</td>
-            <td>30.86</td>
-            <td>57.61</td>
+            <td class="sticky-col model-col"><a href="https://mistral.ai/news/mistral-small-3-1" target="_blank"
+                    rel="noopener noreferrer">Mistral Small</a></td>
+            <td class="sticky-col organization-col">Mistral AI</td>
+            <td class="sticky-col globalAverage-col">40.55</td>
+            <td>37.08</td>
+            <td>49.65</td>
+            <td>8.33</td>
+            <td>38.39</td>
+            <td>52.14</td>
+            <td>34.59</td>
+            <td>63.66</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://openai.com/index/gpt-4-1/" target="_blank"
+                    rel="noopener noreferrer">GPT-4.1 Nano</a></td>
+            <td class="sticky-col organization-col">OpenAI</td>
+            <td class="sticky-col globalAverage-col">40.51</td>
+            <td>35.58</td>
+            <td>63.92</td>
+            <td>3.33</td>
+            <td>42.39</td>
+            <td>49.82</td>
+            <td>30.96</td>
+            <td>57.54</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a href="https://www.anthropic.com/claude/haiku" target="_blank"
+                    rel="noopener noreferrer">Claude 3.5 Haiku</a></td>
+            <td class="sticky-col organization-col">Anthropic</td>
+            <td class="sticky-col globalAverage-col">39.51</td>
+            <td>26.19</td>
+            <td>53.17</td>
+            <td>6.67</td>
+            <td>34.84</td>
+            <td>54.12</td>
+            <td>39.71</td>
+            <td>61.88</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a href="https://blog.google/technology/developers/gemma-3/"
@@ -671,18 +658,17 @@
             <td>73.83</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a
-                    href="https://developers.googleblog.com/en/introducing-gemma-3n-developer-guide/" target="_blank"
-                    rel="noopener noreferrer">Gemma 3n E2B IT</a></td>
-            <td class="sticky-col organization-col">Google</td>
-            <td class="sticky-col globalAverage-col">21.74</td>
-            <td>19.67</td>
-            <td>16.44</td>
+            <td class="sticky-col model-col"><a href="https://docs.cohere.com/docs/models" target="_blank"
+                    rel="noopener noreferrer">Command R Plus</a></td>
+            <td class="sticky-col organization-col">Cohere</td>
+            <td class="sticky-col globalAverage-col">30.14</td>
+            <td>21.64</td>
+            <td>27.13</td>
             <td>1.67</td>
-            <td>26.32</td>
-            <td>15.67</td>
-            <td>15.04</td>
-            <td>57.41</td>
+            <td>22.82</td>
+            <td>49.23</td>
+            <td>30.86</td>
+            <td>57.61</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a
@@ -699,17 +685,17 @@
             <td>64.74</td>
         </tr>
         <tr>
-            <td class="sticky-col model-col"><a href="https://huggingface.co/mistralai/Mistral-Large-Instruct-2411"
-                    target="_blank" rel="noopener noreferrer">Mistral Large</a></td>
-            <td class="sticky-col organization-col">Mistral AI</td>
-            <td class="sticky-col globalAverage-col">43.31</td>
-            <td>33.83</td>
-            <td>62.89</td>
+            <td class="sticky-col model-col"><a href="https://docs.cohere.com/docs/models" target="_blank"
+                    rel="noopener noreferrer">Command R</a></td>
+            <td class="sticky-col organization-col">Cohere</td>
+            <td class="sticky-col globalAverage-col">27.15</td>
+            <td>20.58</td>
+            <td>26.10</td>
             <td>1.67</td>
-            <td>42.20</td>
-            <td>54.20</td>
-            <td>40.45</td>
-            <td>67.93</td>
+            <td>18.35</td>
+            <td>39.77</td>
+            <td>27.93</td>
+            <td>55.62</td>
         </tr>
         <tr>
             <td class="sticky-col model-col"><a href="https://blog.google/technology/developers/gemma-3/"
@@ -723,6 +709,20 @@
             <td>17.90</td>
             <td>15.06</td>
             <td>63.58</td>
+        </tr>
+        <tr>
+            <td class="sticky-col model-col"><a
+                    href="https://developers.googleblog.com/en/introducing-gemma-3n-developer-guide/" target="_blank"
+                    rel="noopener noreferrer">Gemma 3n E2B IT</a></td>
+            <td class="sticky-col organization-col">Google</td>
+            <td class="sticky-col globalAverage-col">21.74</td>
+            <td>19.67</td>
+            <td>16.44</td>
+            <td>1.67</td>
+            <td>26.32</td>
+            <td>15.67</td>
+            <td>15.04</td>
+            <td>57.41</td>
         </tr>
     </tbody>
 </table>
