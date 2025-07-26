@@ -10,6 +10,7 @@ if __name__ == "__main__":
     ).to_csv(
         "livebench-coding.csv",
         index=False,
+        float_format="%.2f",
     )
 
     [df] = pd.read_html("lmarena.html")
