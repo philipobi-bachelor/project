@@ -1,0 +1,85 @@
+// 9174ede
+// 67cc7f7
+digraph G {
+    rankdir=BT;
+    node[
+        shape=circle, 
+        fixedsize=true,
+        width=0.8;
+        margin=0.05
+    ];
+    
+    
+    release_09_label [label="release-09-00-00", shape="plaintext", fixedsize=false]
+    release_09 [label="9174ede"];
+    profiling_base [label="67cc7f7"];
+    profiling_v0fitter_base [label="050e500"];
+    profiling_newv0fitter_base [label="3ca6556"];
+    
+    profiling_v0fitter_refactor_base [label="f36ee64"];
+    profiling_v0fitter_refactor_commit1 [label="9723635"];
+    profiling_v0fitter_refactor_commit2 [label="..."];
+    profiling_v0fitter_refactor_commit3 [label="a4aaf96"];
+        
+    v0fitter_refactor_base [label="4d43b88"];
+    v0fitter_refactor_commit1 [label = "..."];
+    v0fitter_refactor_commit2 [label = "1097e24"];
+    v0fitter_refactor_commit3 [label = "..."];
+    v0fitter_refactor_commit4 [label = "26f9ea6"];
+    v0fitter_refactor_commit5 [label = "62efa1f"];
+
+
+    release_09 -> release_09_label [style=invis, minlen=1];
+    { rank=same; release_09_label; release_09};
+    release_09 -> v0fitter_refactor_base;
+    
+
+    release_09 -> profiling_base;
+
+    subgraph cluster_branch_profiling_v0fitter {
+        label="profiling-v0fitter";
+        labelloc="b"
+
+        profiling_v0fitter_base;
+    }
+    subgraph cluster_branch_profiling_newv0fitter {
+        label="profiling-\lnewv0fitter\l"
+        labelloc="b"
+
+        profiling_newv0fitter_base
+    }
+    subgraph cluster_profiling_base {
+        label="profiling-base"
+
+        profiling_base
+    }
+    
+    profiling_base -> profiling_v0fitter_base;
+    profiling_base -> profiling_newv0fitter_base;
+    profiling_base -> profiling_v0fitter_refactor_base;
+    
+    subgraph cluster_branch_v0fitter_refactor {
+        label="v0fitter-refactor"
+        labelloc="b"
+
+        v0fitter_refactor_base ->
+        v0fitter_refactor_commit1 -> 
+        v0fitter_refactor_commit2 -> 
+        v0fitter_refactor_commit3 -> 
+        v0fitter_refactor_commit4 -> 
+        v0fitter_refactor_commit5;
+    }
+
+    subgraph cluster_branch_profiling_v0fitter_refactor {
+        label="profiling-v0fitter-\lrefactor\l"
+        labelloc="b"
+
+        profiling_v0fitter_refactor_base -> 
+        profiling_v0fitter_refactor_commit1 ->
+        profiling_v0fitter_refactor_commit2 ->
+        profiling_v0fitter_refactor_commit3
+    }
+    
+    v0fitter_refactor_commit2 -> profiling_v0fitter_refactor_commit1;
+    v0fitter_refactor_commit4 -> profiling_v0fitter_refactor_commit3;
+}
